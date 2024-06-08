@@ -1,12 +1,14 @@
 import React from "react";
-import { useTodoIds, useTodos } from "../api/queries";
-import { useCreateTodo, useDeleteTodo, useUpdateTodo } from "../api/mutations";
+import { useTodoIds, useTodos } from "../api/queries/todos.queries";
+import {
+  useCreateTodo,
+  useDeleteTodo,
+  useUpdateTodo,
+} from "../api/mutations/todos.mutations";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Todo } from "../types";
 
-export interface TodosProps {}
-
-export const Todos: React.FC<TodosProps> = ({}) => {
+export const Todos: React.FC = () => {
   const todoIdsQuery = useTodoIds();
   const todoQueries = useTodos(todoIdsQuery.data);
   const createTodoMutation = useCreateTodo();
@@ -32,8 +34,8 @@ export const Todos: React.FC<TodosProps> = ({}) => {
     });
   };
 
-  const handleDeleteTodoSubmit = (todoId: number) => {
-    deleteTodoMutation.mutate(todoId);
+  const handleDeleteTodoSubmit = async (todoId: number) => {
+    deleteTodoMutation.mutateAsync(todoId);
   };
 
   return (
