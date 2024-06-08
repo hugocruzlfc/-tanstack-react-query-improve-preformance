@@ -6,8 +6,6 @@ export const Projects: React.FC = () => {
   const { data, isPending, isError, isPlaceholderData, isFetching } =
     useProjects(page);
 
-  console.log(data);
-
   return (
     <div>
       {isPending && <div>Loading...</div>}
